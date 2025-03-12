@@ -1,9 +1,9 @@
 {
-  "name": "@openmrs/esm-template-app",
-  "version": "4.0.0",
+  "name": "@openmrs/esm-patient-management-sih-salus-app",
+  "version": "1.0.0",
   "license": "MPL-2.0",
   "description": "An OpenMRS seed application for building microfrontends",
-  "browser": "dist/openmrs-esm-template-app.js",
+  "browser": "dist/openmrs-esm-patient-management-sih-salus-app.js",
   "main": "src/index.ts",
   "source": true,
   "scripts": {
@@ -30,9 +30,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/openmrs/openmrs-esm-template-app.git"
+    "url": "git+https://github.com/PROYECTO-SANTACLOTILDE/esm-patient-management-sih-salus-app.git"
   },
-  "homepage": "https://github.com/openmrs/openmrs-esm-template-app#readme",
+  "homepage": "https://github.com/PROYECTO-SANTACLOTILDE/esm-patient-management-sih-salus-app#readme",
   "publishConfig": {
     "access": "public"
   },
