@@ -1,15 +1,7 @@
-@use '@carbon/layout';
-@use '@carbon/type';
-
-.container {
-  padding: layout.$spacing-07;
+.root {
+  background-color: white;
 }
 
-.welcome {
-  @include type.type-style('heading-04');
-  margin: layout.$spacing-05 0;
-}
-
-.explainer {
-  margin-bottom: layout.$spacing-07;
+.grid {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
 }

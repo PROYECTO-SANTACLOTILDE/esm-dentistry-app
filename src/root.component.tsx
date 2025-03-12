@@ -1,39 +1,63 @@
-/**
- * From here, the application is pretty typical React, but with lots of
- * support from `@openmrs/esm-framework`. Check out `Greeter` to see
- * usage of the configuration system, and check out `PatientGetter` to
- * see data fetching using the OpenMRS FHIR API.
- *
- * Check out the Config docs:
- *   https://openmrs.github.io/openmrs-esm-core/#/main/config
- */
-
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { Boxes } from './boxes/slot/boxes.component';
-import Greeter from './greeter/greeter.component';
-import PatientGetter from './patient-getter/patient-getter.component';
-import Resources from './resources/resources.component';
+import React, { useMemo } from 'react';
+import classNames from 'classnames';
+import useSWRImmutable from 'swr/immutable';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Grid, Row } from '@carbon/react';
+import { ExtensionSlot, useConnectivity, useSession } from '@openmrs/esm-framework';
+import {
+  ResourcesContext,
+  fetchAddressTemplate,
+  fetchAllRelationshipTypes,
+  fetchPatientIdentifierTypesWithSources,
+} from './offline.resources';
+import { FormManager } from './patient-registration/form-manager';
+import { PatientRegistration } from './patient-registration/patient-registration.component';
 import styles from './root.scss';
 
-const Root: React.FC = () => {
-  const { t } = useTranslation();
+export default function Root() {
+  const isOnline = useConnectivity();
+  const currentSession = useSession();
+  const { data: addressTemplate } = useSWRImmutable('patientRegistrationAddressTemplate', fetchAddressTemplate);
+  const { data: relationshipTypes } = useSWRImmutable(
+    'patientRegistrationRelationshipTypes',
+    fetchAllRelationshipTypes,
+  );
+  const { data: identifierTypes } = useSWRImmutable(
+    'patientRegistrationPatientIdentifiers',
+    fetchPatientIdentifierTypesWithSources,
+  );
+  const savePatientForm = useMemo(
+    () => (isOnline ? FormManager.savePatientFormOnline : FormManager.savePatientFormOffline),
+    [isOnline],
+  );
 
   return (
-    <div className={styles.container}>
-      <h3 className={styles.welcome}>{t('welcomeText', 'Welcome to the O3 Template app')}</h3>
-      <p className={styles.explainer}>
-        {t('explainer', 'The following examples demonstrate some key features of the O3 framework')}.
-      </p>
-      {/* Greeter: demonstrates the configuration system */}
-      <Greeter />
-      {/* Boxes: demonstrates the extension system */}
-      <Boxes />
-      {/* PatientGetter: demonstrates data fetching */}
-      <PatientGetter />
-      <Resources />
-    </div>
+    <main className={classNames('omrs-main-content', styles.root)}>
+      <Grid className={styles.grid}>
+        <Row>
+          <ExtensionSlot name="breadcrumbs-slot" />
+        </Row>
+        <ResourcesContext.Provider
+          value={{
+            addressTemplate,
+            relationshipTypes,
+            identifierTypes,
+            currentSession,
+          }}>
+          <BrowserRouter basename={window.getOpenmrsSpaBase()}>
+            <Routes>
+              <Route
+                path="patient-registration"
+                element={<PatientRegistration savePatientForm={savePatientForm} isOffline={!isOnline} />}
+              />
+              <Route
+                path="patient/:patientUuid/edit"
+                element={<PatientRegistration savePatientForm={savePatientForm} isOffline={!isOnline} />}
+              />
+            </Routes>
+          </BrowserRouter>
+        </ResourcesContext.Provider>
+      </Grid>
+    </main>
   );
-};
-
-export default Root;
+}
