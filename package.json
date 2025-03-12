@@ -1,5 +1,5 @@
 {
-  "name": "@openmrs/esm-patient-management-sih-salus-app",
+  "name": "@pucp-gidis-hiisc/esm-patient-management-sih-salus-app",
   "version": "1.0.0",
   "license": "MPL-2.0",
   "description": "An OpenMRS seed application for building microfrontends",
