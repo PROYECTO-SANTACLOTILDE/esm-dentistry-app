@@ -40,7 +40,8 @@ describe('Dob', () => {
               isOffline: false,
               initialFormValues: initialFormValues,
               setFieldTouched: () => {},
-            }}>
+            }}
+          >
             <DobField />
           </PatientRegistrationContext.Provider>
         </Form>
@@ -89,7 +90,8 @@ describe('Dob', () => {
               isOffline: false,
               initialFormValues: initialFormValues,
               setFieldTouched: () => {},
-            }}>
+            }}
+          >
             <DobField />
           </PatientRegistrationContext.Provider>
         </Form>

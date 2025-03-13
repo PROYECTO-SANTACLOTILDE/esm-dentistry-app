@@ -43,7 +43,8 @@ export default function Root() {
             relationshipTypes,
             identifierTypes,
             currentSession,
-          }}>
+          }}
+        >
           <BrowserRouter basename={window.getOpenmrsSpaBase()}>
             <Routes>
               <Route

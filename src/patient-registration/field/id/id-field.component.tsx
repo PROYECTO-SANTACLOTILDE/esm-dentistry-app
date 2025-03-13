@@ -127,7 +127,8 @@ export const Identifiers: React.FC = () => {
             kind="ghost"
             className={styles.configureIdentifiersButton}
             onClick={() => setShowIdentifierOverlay(true)}
-            size={isDesktop(layout) ? 'sm' : 'md'}>
+            size={isDesktop(layout) ? 'sm' : 'md'}
+          >
             {t('configure', 'Configure')} <ArrowRight className={styles.arrowRightIcon} size={16} />
           </Button>
         </div>

@@ -68,7 +68,8 @@ describe('Demographics section', () => {
               isOffline: true,
               setCapturePhotoProps: (value) => {},
               setFieldTouched: () => {},
-            }}>
+            }}
+          >
             <DemographicsSection fields={['name', 'gender', 'dob']} />
           </PatientRegistrationContext.Provider>
         </Form>

@@ -35,7 +35,8 @@ export const GenderField: React.FC = () => {
           legendText={t('genderLabelText', 'Sex')}
           orientation="vertical"
           onChange={setGender}
-          valueSelected={field.value}>
+          valueSelected={field.value}
+        >
           {fieldConfigs.map((option) => (
             <RadioButton
               key={option.label ?? option.value}

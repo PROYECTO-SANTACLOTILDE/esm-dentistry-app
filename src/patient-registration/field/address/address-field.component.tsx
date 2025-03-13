@@ -145,7 +145,8 @@ const AddressComponentContainer = ({ children }) => {
       <div
         style={{
           paddingBottom: '5%',
-        }}>
+        }}
+      >
         {children}
       </div>
     </div>
