@@ -6,7 +6,7 @@
   "pages": [
     {
       "component": "root",
-      "route": "patient-registration",
+      "route": "test",
       "online": true,
       "offline": true
     },
